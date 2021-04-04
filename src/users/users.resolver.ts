@@ -9,8 +9,10 @@ import { UsersService } from './users.service';
 
 @Resolver(() => User)
 export class UsersResolver {
+  // inject users service
   constructor(private readonly usersService: UsersService) {}
 
+  // queries
   @Query(() => User, { name: 'user', nullable: true })
   async gerUser(@Args() getUserArgs: GetUserArgs): Promise<User> {
     return this.usersService.getUser(getUserArgs);
@@ -21,6 +23,7 @@ export class UsersResolver {
     return this.usersService.getUsers(getUsersArgs);
   }
 
+  // mutations
   @Mutation(() => User)
   async createUser(
     @Args('createUserData') createUserData: CreateUserInput,
